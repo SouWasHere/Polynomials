@@ -30,21 +30,17 @@
 
 <style>
   :root {
-    --bg-grad-1: #667eea;
-    --bg-grad-2: #764ba2;
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --card-border: rgba(255, 255, 255, 0.3);
-    --text-main: #1f2937;
-    --text-sec: #4b5563;
-    --input-bg: rgba(255, 255, 255, 0.9);
-    --input-border: #d1d5db;
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --result-bg: #e0e7ff;
-    --result-text: #3730a3;
-    /* Added missing variables that were in your config */
-    --heading-font-family: 'Inter', sans-serif;
-  }
+  --card-bg: rgba(20, 20, 20, 0.95);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f5f5f5;
+  --text-sec: #a1a1aa;
+  --input-bg: rgba(40, 40, 40, 0.9);
+  --input-border: #3f3f46;
+  --primary: #ffffff;
+  --primary-hover: #d4d4d8;
+  --result-bg: rgba(30, 30, 30, 0.9);
+  --result-text: #ffffff;
+}
 
   .dark {
     --bg-grad-1: #0f2027;
@@ -71,16 +67,15 @@
 </head>
 
 <body
-  class="min-h-screen flex flex-col items-center px-5 py-10 box-border 
-  font-[League Spartan] text-white 
-  bg-black bg-cover bg-center bg-fixed transition-all duration-400"
+ class="min-h-screen flex flex-col items-center px-5 py-10 
+  font-[League Spartan] text-white bg-black transition-all duration-400"
   style="background-image: url('bg.gif');">
 
   <!-- Header -->
   <header class="w-full max-w-3xl text-center mb-6">
-    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white drop-shadow-lg">
-      Numerical Methods
-    </h1>
+   <h1 class="text-4xl md:text-5xl font-bold tracking-wide text-white">
+  Numerical Methods
+</h1>
     <button
       id="themeBtn"
       onclick="toggleTheme()"
@@ -461,6 +456,7 @@ if (relErr === 0) {
   </script>
 </body>
 </html>
+
 
 
 
