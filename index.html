@@ -352,17 +352,15 @@
     });
 
     // --- MATH UTILITIES ---
-    function chop(num, k) {
-      if (num === 0) return 0;
-      const factor = Math.pow(10, k - Math.floor(Math.log10(Math.abs(num))) - 1);
-      return Math.trunc(num * factor) / factor;
-    }
+   function chop(num, k) {
+  const factor = Math.pow(10, k);
+  return Math.trunc(num * factor) / factor;
+}
 
-    function roundNum(num, k) {
-      if (num === 0) return 0;
-      const factor = Math.pow(10, k - Math.floor(Math.log10(Math.abs(num))) - 1);
-      return Math.round(num * factor) / factor;
-    }
+function roundNum(num, k) {
+  const factor = Math.pow(10, k);
+  return Math.round(num * factor) / factor;
+}
 
     function showResult(elementId, content) {
       const el = document.getElementById(elementId);
@@ -457,5 +455,6 @@
   </script>
 </body>
 </html>
+
 
 
