@@ -10,81 +10,64 @@
 
   <!-- Tailwind Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Your Tailwind config merged in
-    tailwind.config = {
-      content: ["./src/**/*.{html,js,ts,jsx,tsx}", "./index.html"],
-      theme: {
-        extend: {
-          colors: {
-            "color-background-default-default": "var(--color-background-default-default)",
-            "color-background-utilities-blanket": "var(--color-background-utilities-blanket)",
-            "color-border-default-default": "var(--color-border-default-default)",
-            "color-border-utilities-measurement": "var(--color-border-utilities-measurement)",
-            "color-primitives-brand-100": "var(--color-primitives-brand-100)",
-            "color-text-brand-on-brand": "var(--color-text-brand-on-brand)",
-            "color-text-default-default": "var(--color-text-default-default)",
-            "colors-accents-blue": "var(--colors-accents-blue)",
-            "colors-miscellaneous-window-controls-close": "var(--colors-miscellaneous-window-controls-close)",
-            "m3-state-layers-error-container-opacity-08": "var(--m3-state-layers-error-container-opacity-08)",
-            "m3sysdark-medium-contraston-surface": "var(--m3sysdark-medium-contraston-surface)",
-          },
-          fontFamily: {
-            heading: "var(--heading-font-family)",
-            "single-line-body-base": "var(--single-line-body-base-font-family)",
-            subheading: "var(--subheading-font-family)",
-          },
-        },
-      },
-      plugins: [],
-    };
-  </script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          // Mapping Tailwind names to your custom CSS variables
+          primary: "var(--primary)",
+          "primary-hover": "var(--primary-hover)",
+          "card-bg": "var(--card-bg)",
+          "card-border": "var(--card-border)",
+          "text-main": "var(--text-main)",
+          "text-sec": "var(--text-sec)",
+        }
+      }
+    }
+  };
+</script>
 
-  <style>
-    /* Design tokens for gradients, card, etc. */
-    :root {
-      --bg-grad-1: #667eea;
-      --bg-grad-2: #764ba2;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-border: rgba(255, 255, 255, 0.3);
-      --text-main: #1f2937;
-      --text-sec: #4b5563;
-      --input-bg: rgba(255, 255, 255, 0.9);
-      --input-border: #d1d5db;
-      --primary: #4f46e5;
-      --primary-hover: #4338ca;
-      --result-bg: #e0e7ff;
-      --result-text: #3730a3;
-    }
+<style>
+  :root {
+    --bg-grad-1: #667eea;
+    --bg-grad-2: #764ba2;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(255, 255, 255, 0.3);
+    --text-main: #1f2937;
+    --text-sec: #4b5563;
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: #d1d5db;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --result-bg: #e0e7ff;
+    --result-text: #3730a3;
+    /* Added missing variables that were in your config */
+    --heading-font-family: 'Inter', sans-serif;
+  }
 
-    .dark {
-      --bg-grad-1: #0f2027;
-      --bg-grad-2: #203a43;
-      --card-bg: rgba(31, 41, 55, 0.85);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #f9fafb;
-      --text-sec: #9ca3af;
-      --input-bg: rgba(17, 24, 39, 0.8);
-      --input-border: #4b5563;
-      --primary: #6366f1;
-      --primary-hover: #4f46e5;
-      --result-bg: #1e1b4b;
-      --result-text: #c7d2fe;
-    }
+  .dark {
+    --bg-grad-1: #0f2027;
+    --bg-grad-2: #203a43;
+    --card-bg: rgba(31, 41, 55, 0.85);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f9fafb;
+    --text-sec: #9ca3af;
+    --input-bg: rgba(17, 24, 39, 0.8);
+    --input-border: #4b5563;
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --result-bg: #1e1b4b;
+    --result-text: #c7d2fe;
+  }
 
-    /* Simple page fade animation when switching tabs */
-    .page {
-      display: none;
-    }
-    .page.active-page {
-      display: block;
-      animation: fadeInPage 0.4s ease;
-    }
-    @keyframes fadeInPage {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  .page { display: none; }
+  .page.active-page { display: block; animation: fadeInPage 0.4s ease; }
+  @keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 
 <body
@@ -471,3 +454,4 @@
   </script>
 </body>
 </html>
+
