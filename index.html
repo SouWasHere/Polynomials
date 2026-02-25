@@ -414,14 +414,20 @@ function roundNum(num, k) {
       const absErr = Math.abs(p - pstar);
       const relErr = p !== 0 ? absErr / Math.abs(p) : 0;
       const maxErr = p !== 0 ? 0.5 * Math.pow(10, -Math.floor(Math.log10(Math.abs(p)))) : 0;
-      const sigDigits = relErr > 0 ? Math.max(0, Math.floor(-Math.log10(relErr))) : "Exact Match";
+      let decimalCorrect;
+if (relErr === 0) {
+  decimalCorrect = "Exact Match";
+} else {
+  decimalCorrect = Math.max(0, Math.floor(-Math.log10(relErr)));
+}
 
       showResult(
         "errorResult",
         `<strong>Absolute Error:</strong> ${absErr.toExponential(4)} <br>
          <strong>Relative Error:</strong> ${relErr.toExponential(4)} <br>
          <strong>Maximum Error:</strong> ${maxErr} <br>
-         <strong>Significant Digits:</strong> ${sigDigits}`
+         <strong>Significant Digits:</strong> ${sigDigits}
+         <strong>Correct Decimal Places:</strong> ${decimalCorrect}
       );
     }
 
@@ -455,6 +461,7 @@ function roundNum(num, k) {
   </script>
 </body>
 </html>
+
 
 
 
