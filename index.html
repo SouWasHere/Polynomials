@@ -156,8 +156,8 @@ document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'
 document.getElementById(pageId).classList.add('active-page');
 
 document.querySelectorAll('.tab-btn').forEach(b => {
-b.classList.remove('bg-zinc-900','border-zinc-500');
-b.classList.add('bg-black','border-zinc-700');
+  b.classList.remove('bg-zinc-900','border-zinc-500');
+  b.classList.add('bg-black','border-zinc-700');
 });
 
 btn.classList.remove('bg-black','border-zinc-700');
@@ -175,33 +175,33 @@ return Math.round(num * factor) / factor;
 }
 
 function showResult(id, content) {
-const el = document.getElementById(id);
-el.innerHTML = content;
-el.classList.remove("hidden");
+  const el = document.getElementById(id);
+  el.innerHTML = content;
+  el.classList.remove("hidden");
 }
 
 function compute() {
-const a = parseFloat(num1.value);
-const b = parseFloat(num2.value);
-const op = operator.value;
-const k = parseInt(sig.value);
-const method = method.value;
+  const a = parseFloat(num1.value);
+  const b = parseFloat(num2.value);
+  const op = operator.value;
+  const k = parseInt(sig.value);
+  const meth = method.value;
 
-if (isNaN(a) || isNaN(b)) return showResult("basicResult","Enter valid numbers.");
+  if (isNaN(a) || isNaN(b)) return showResult("basicResult","Enter valid numbers.");
 
-let exact;
-if (op==="+") exact=a+b;
-if (op==="-") exact=a-b;
-if (op==="*") exact=a*b;
-if (op==="/") {
-if (b===0) return showResult("basicResult","Cannot divide by zero.");
-exact=a/b;
-}
+  let exact;
+  if (op==="+") exact=a+b;
+  if (op==="-") exact=a-b;
+  if (op==="*") exact=a*b;
+  if (op==="/") {
+    if (b===0) return showResult("basicResult","Cannot divide by zero.");
+    exact=a/b;
+  }
 
-const approx = method==="chop" ? chop(exact,k) : roundNum(exact,k);
+  const approx = meth === "chop" ? chop(exact,k) : roundNum(exact,k);
 
-showResult("basicResult",
-`Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
+  return showResult("basicResult",
+  `Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
 }
 
 function errorAnalysis() {
@@ -223,22 +223,22 @@ Correct Decimal Places: ${decimals}`);
 }
 
 function evaluatePoly() {
-const poly = document.getElementById("poly").value;
-const x = parseFloat(xval.value);
-const k = parseInt(polySig.value);
-const method = polyMethod.value;
+  const poly = document.getElementById("poly").value;
+  const x = parseFloat(xval.value);
+  const k = parseInt(polySig.value);
+  const method = polyMethod.value;
 
-if (!poly || isNaN(x)) return showResult("polyResult","Invalid input.");
+  if (!poly || isNaN(x)) return showResult("polyResult","Invalid input.");
 
-try {
-const exact = eval(poly.replace(/x/g,"("+x+")"));
-const approx = method==="chop"?chop(exact,k):roundNum(exact,k);
+  try {
+    const exact = eval(poly.replace(/x/g,"("+x+")"));
+    const approx = method==="chop"?chop(exact,k):roundNum(exact,k);
 
-showResult("polyResult",
-`Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
-} catch {
-showResult("polyResult","Invalid polynomial format.");
-}
+    showResult("polyResult",
+    `Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
+  } catch {
+    showResult("polyResult","Invalid polynomial format.");
+  }
 }
 
 </script>
