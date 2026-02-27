@@ -3,181 +3,186 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Numerical Methods Calculator</title>
 
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Numerical Methods</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-:root {
-  --card-bg: rgba(20,20,20,0.95);
-  --card-border: #27272a;
-  --text-main: #f4f4f5;
-  --text-sec: #a1a1aa;
-  --input-bg: #1c1c1f;
-  --input-border: #2e2e33;
-  --result-bg: #18181b;
-  --result-text: #ffffff;
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f4f4;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
 }
 
 .page { display: none; }
-.page.active-page { display: block; animation: fadeInPage 0.3s ease; }
+.page.active { display: block; }
 
-@keyframes fadeInPage {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.sidebar-link {
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sidebar-link:hover {
+  opacity: 0.6;
+}
+
+.sidebar-link.active {
+  font-weight: 600;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e5e5;
+}
+
+input, select {
+  border: 1px solid #ddd;
+}
+
+button.primary-btn {
+  border: 1px solid black;
+  transition: 0.2s ease;
+}
+
+button.primary-btn:hover {
+  background: black;
+  color: white;
 }
 </style>
 </head>
 
-<body class="min-h-screen flex flex-col items-center px-5 py-10 font-[League Spartan] text-white bg-black"
-style="background-image:url('bg.gif'); background-size:cover; background-position:center;">
+<body class="min-h-screen flex">
 
-<header class="w-full max-w-3xl text-center mb-6">
-<h1 class="text-4xl md:text-5xl font-bold tracking-wide text-white">
-Numerical Methods
-</h1>
-</header>
+<!-- SIDEBAR -->
+<aside class="w-48 border-r border-gray-200 px-6 py-10 flex flex-col justify-between">
+  <div>
+    <h2 class="text-lg font-semibold mb-10 tracking-wide">Numerical</h2>
 
-<nav class="w-full max-w-3xl flex flex-wrap justify-center gap-3 mb-6">
-<button class="tab-btn bg-zinc-900 border border-zinc-500 px-5 py-3 rounded-xl font-semibold text-sm"
-onclick="openPage('page-basic', this)">Basic Operations</button>
+    <nav class="flex flex-col gap-4 text-sm">
+      <div class="sidebar-link active" onclick="openPage('basic', this)">Basic</div>
+      <div class="sidebar-link" onclick="openPage('error', this)">Error</div>
+      <div class="sidebar-link" onclick="openPage('poly', this)">Polynomial</div>
+    </nav>
+  </div>
 
-<button class="tab-btn bg-black border border-zinc-700 px-5 py-3 rounded-xl font-semibold text-sm"
-onclick="openPage('page-error', this)">Error Analysis</button>
+  <div class="text-xs text-gray-400 rotate-180 [writing-mode:vertical-rl]">
+    Numerical Methods
+  </div>
+</aside>
 
-<button class="tab-btn bg-black border border-zinc-700 px-5 py-3 rounded-xl font-semibold text-sm"
-onclick="openPage('page-poly', this)">Polynomials</button>
-</nav>
+<!-- MAIN -->
+<main class="flex-1 px-16 py-16">
 
-<main class="w-full max-w-3xl space-y-6">
+  <div class="max-w-3xl">
 
-<section id="page-basic" class="page active-page">
-<div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6">
+    <h1 class="text-5xl mb-4">Numerical Methods Calculator</h1>
+    <p class="text-gray-500 mb-12">
+      Precision computation with controlled approximation.
+    </p>
 
-<h2 class="text-lg font-semibold mb-5">I. Basic Operations</h2>
+    <!-- BASIC -->
+    <section id="basic" class="page active">
+      <div class="card p-8">
+        <h2 class="text-2xl mb-6">Basic Operations</h2>
 
-<div class="grid grid-cols-[2fr,1fr,2fr] gap-3 mb-4">
-<input type="number" id="num1" placeholder="First number"
-class="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <input type="number" id="num1" placeholder="First number" class="p-2">
+          <select id="operator" class="p-2">
+            <option value="+">+</option>
+            <option value="-">−</option>
+            <option value="*">×</option>
+            <option value="/">÷</option>
+          </select>
+          <input type="number" id="num2" placeholder="Second number" class="p-2">
+        </div>
 
-<select id="operator"
-class="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-<option value="+">+</option>
-<option value="-">-</option>
-<option value="*">×</option>
-<option value="/">÷</option>
-</select>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <input type="number" id="sig" value="4" placeholder="Decimal Places">
+          <select id="method">
+            <option value="chop">Chopping</option>
+            <option value="round">Rounding</option>
+          </select>
+        </div>
 
-<input type="number" id="num2" placeholder="Second number"
-class="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-</div>
+        <button onclick="compute()" class="primary-btn px-6 py-2">
+          Compute
+        </button>
 
-<div class="grid gap-4 md:grid-cols-2">
-<div>
-<label class="text-sm text-[var(--text-sec)]">Decimal Places (k)</label>
-<input type="number" id="sig" value="4" min="0"
-class="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-</div>
+        <div id="basicResult" class="mt-6 text-lg"></div>
+      </div>
+    </section>
 
-<div>
-<label class="text-sm text-[var(--text-sec)]">Method</label>
-<select id="method"
-class="w-full px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-<option value="chop">Chopping</option>
-<option value="round">Rounding</option>
-</select>
-</div>
-</div>
+    <!-- ERROR -->
+    <section id="error" class="page">
+      <div class="card p-8">
+        <h2 class="text-2xl mb-6">Error Analysis</h2>
 
-<button onclick="compute()"
-class="mt-4 w-full py-3 rounded-lg bg-black border border-zinc-700 hover:bg-zinc-900">
-Compute
-</button>
+        <input type="number" id="trueVal" placeholder="True Value" class="p-2 w-full mb-4">
+        <input type="number" id="approxVal" placeholder="Approximation" class="p-2 w-full mb-6">
 
-<div id="basicResult" class="mt-4 hidden bg-[var(--result-bg)] p-3 rounded-lg"></div>
-</div>
-</section>
+        <button onclick="errorAnalysis()" class="primary-btn px-6 py-2">
+          Compute
+        </button>
 
-<section id="page-error" class="page">
-<div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6">
-<h2 class="text-lg font-semibold mb-5">II. Error Analysis</h2>
+        <div id="errorResult" class="mt-6 text-lg"></div>
+      </div>
+    </section>
 
-<input type="number" id="trueVal" placeholder="True value"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
+    <!-- POLY -->
+    <section id="poly" class="page">
+      <div class="card p-8">
+        <h2 class="text-2xl mb-6">Polynomial Evaluation</h2>
 
-<input type="number" id="approxVal" placeholder="Approximation"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
+        <input type="text" id="polyInput" placeholder="2*x**3 + 3*x**2 - 4*x + 1"
+          class="p-2 w-full mb-4">
 
-<button onclick="errorAnalysis()"
-class="w-full py-3 rounded-lg bg-black border border-zinc-700 hover:bg-zinc-900">
-Compute Errors
-</button>
+        <input type="number" id="xval" placeholder="Value of x"
+          class="p-2 w-full mb-4">
 
-<div id="errorResult" class="mt-4 hidden bg-[var(--result-bg)] p-3 rounded-lg"></div>
-</div>
-</section>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <input type="number" id="polySig" value="4" placeholder="Decimal Places">
+          <select id="polyMethod">
+            <option value="chop">Chopping</option>
+            <option value="round">Rounding</option>
+          </select>
+        </div>
 
-<section id="page-poly" class="page">
-<div class="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-6">
-<h2 class="text-lg font-semibold mb-5">III. Polynomial Evaluation</h2>
+        <button onclick="evaluatePoly()" class="primary-btn px-6 py-2">
+          Evaluate
+        </button>
 
-<input type="text" id="poly" placeholder="2*x**3 + 3*x**2 - 4*x + 1"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
+        <div id="polyResult" class="mt-6 text-lg"></div>
+      </div>
+    </section>
 
-<input type="number" id="xval" placeholder="Value of x"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-
-<label class="text-sm text-[var(--text-sec)]">Decimal Places</label>
-<input type="number" id="polySig" value="4" min="0"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-
-<select id="polyMethod"
-class="w-full mb-3 px-3 py-2 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)]">
-<option value="chop">Chopping</option>
-<option value="round">Rounding</option>
-</select>
-
-<button onclick="evaluatePoly()"
-class="w-full py-3 rounded-lg bg-black border border-zinc-700 hover:bg-zinc-900">
-Evaluate
-</button>
-
-<div id="polyResult" class="mt-4 hidden bg-[var(--result-bg)] p-3 rounded-lg"></div>
-</div>
-</section>
+  </div>
 
 </main>
 
 <script>
 
-function openPage(pageId, btn) {
-document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-document.getElementById(pageId).classList.add('active-page');
+function openPage(page, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
 
-document.querySelectorAll('.tab-btn').forEach(b => {
-  b.classList.remove('bg-zinc-900','border-zinc-500');
-  b.classList.add('bg-black','border-zinc-700');
-});
-
-btn.classList.remove('bg-black','border-zinc-700');
-btn.classList.add('bg-zinc-900','border-zinc-500');
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
 }
 
 function chop(num, k) {
-const factor = Math.pow(10, k);
-return Math.trunc(num * factor) / factor;
+  const f = Math.pow(10, k);
+  return Math.trunc(num * f) / f;
 }
 
 function roundNum(num, k) {
-const factor = Math.pow(10, k);
-return Math.round(num * factor) / factor;
-}
-
-function showResult(id, content) {
-  const el = document.getElementById(id);
-  el.innerHTML = content;
-  el.classList.remove("hidden");
+  const f = Math.pow(10, k);
+  return Math.round(num * f) / f;
 }
 
 function compute() {
@@ -185,63 +190,76 @@ function compute() {
   const b = parseFloat(num2.value);
   const op = operator.value;
   const k = parseInt(sig.value);
-  const meth = method.value;
+  const m = method.value;
 
-  if (isNaN(a) || isNaN(b)) return showResult("basicResult","Enter valid numbers.");
-
-  let exact;
-  if (op==="+") exact=a+b;
-  if (op==="-") exact=a-b;
-  if (op==="*") exact=a*b;
-  if (op==="/") {
-    if (b===0) return showResult("basicResult","Cannot divide by zero.");
-    exact=a/b;
+  if (isNaN(a) || isNaN(b)) {
+    basicResult.innerHTML = "Enter valid numbers.";
+    return;
   }
 
-  const approx = meth === "chop" ? chop(exact,k) : roundNum(exact,k);
+  let exact;
+  if (op === "+") exact = a + b;
+  if (op === "-") exact = a - b;
+  if (op === "*") exact = a * b;
+  if (op === "/") {
+    if (b === 0) {
+      basicResult.innerHTML = "Cannot divide by zero.";
+      return;
+    }
+    exact = a / b;
+  }
 
-  return showResult("basicResult",
-  `Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
+  const approx = m === "chop" ? chop(exact, k) : roundNum(exact, k);
+
+  basicResult.innerHTML =
+    `Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`;
 }
 
 function errorAnalysis() {
-const p = parseFloat(trueVal.value);
-const pstar = parseFloat(approxVal.value);
+  const p = parseFloat(trueVal.value);
+  const pstar = parseFloat(approxVal.value);
 
-if (isNaN(p)||isNaN(pstar)) return showResult("errorResult","Enter valid numbers.");
+  if (isNaN(p) || isNaN(pstar)) {
+    errorResult.innerHTML = "Enter valid numbers.";
+    return;
+  }
 
-const absErr = Math.abs(p-pstar);
-const relErr = p!==0 ? absErr/Math.abs(p) : 0;
+  const absErr = Math.abs(p - pstar);
+  const relErr = p !== 0 ? absErr / Math.abs(p) : 0;
 
-let decimals = relErr===0 ? "Exact Match"
-: Math.max(0, Math.floor(-Math.log10(relErr)));
+  let decimals = relErr === 0 ? "Exact Match"
+    : Math.max(0, Math.floor(-Math.log10(relErr)));
 
-showResult("errorResult",
-`Absolute Error: ${absErr}<br>
-Relative Error: ${relErr}<br>
-Correct Decimal Places: ${decimals}`);
+  errorResult.innerHTML =
+    `Absolute Error: ${absErr}<br>
+     Relative Error: ${relErr}<br>
+     Correct Decimal Places: ${decimals}`;
 }
 
 function evaluatePoly() {
-  const poly = document.getElementById("poly").value;
+  const poly = document.getElementById("polyInput").value;
   const x = parseFloat(xval.value);
   const k = parseInt(polySig.value);
-  const method = polyMethod.value;
+  const m = polyMethod.value;
 
-  if (!poly || isNaN(x)) return showResult("polyResult","Invalid input.");
+  if (!poly || isNaN(x)) {
+    polyResult.innerHTML = "Invalid input.";
+    return;
+  }
 
   try {
-    const exact = eval(poly.replace(/x/g,"("+x+")").replace(/^/g, "**"));
-    const approx = method==="chop"?chop(exact,k):roundNum(exact,k);
+    const exact = eval(poly.replace(/x/g, `(${x})`));
+    const approx = m === "chop" ? chop(exact, k) : roundNum(exact, k);
 
-    showResult("polyResult",
-    `Exact: ${exact}<br>Approximation: ${approx.toFixed(k)}`);
+    polyResult.innerHTML =
+      `Exact: ${exact}<br>
+       Approximation: ${approx.toFixed(k)}`;
   } catch {
-    showResult("polyResult","Invalid polynomial format.");
+    polyResult.innerHTML = "Invalid polynomial format.";
   }
 }
 
 </script>
+
 </body>
 </html>
-
