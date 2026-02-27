@@ -225,10 +225,22 @@ function openPage(id, el) {
 }
 
 function chop(num, k) {
-  const f = Math.pow(10, k);
-  return Math.trunc(num * f) / f;
-}
+  if (num === 0) return 0;
+  
+  // Get the factor
+  const factor = Math.pow(10, k);
+  
+  // Multiply, truncate, divide
+  let chopped = Math.trunc(num * factor) / factor;
 
+  // If very small, use toPrecision to show all significant digits
+  if (Math.abs(chopped) < 1e-4) {
+    return Number(chopped.toExponential(k));
+  }
+  
+  return chopped;
+}
+  
 function roundNum(num, k) {
   const f = Math.pow(10, k);
   return Math.round(num * f) / f;
@@ -241,7 +253,13 @@ function animateValue(element, start, end, decimals, duration = 900) {
     const progress = Math.min((currentTime - startTime) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const value = start + (end - start) * eased;
-    element.textContent = value.toFixed(decimals);
+    
+    if (Math.abs(value) < 1e-4 && value !== 0) {
+      element.textContent = value.toExponential(decimals);
+    } else {
+      element.textContent = value.toFixed(decimals);
+    }
+    
     if (progress < 1) requestAnimationFrame(animation);
   }
   requestAnimationFrame(animation);
@@ -344,6 +362,7 @@ function evaluatePoly() {
 
 </body>
 </html>
+
 
 
 
