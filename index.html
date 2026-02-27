@@ -305,13 +305,22 @@ function evaluatePoly() {
     // 1️⃣ Replace ^ with **
     poly = poly.replace(/\^/g, "**");
 
-    // 2️⃣ Insert multiplication between number and x (2x → 2*x)
+    // 2️⃣ Insert * between number and x (2x → 2*x)
     poly = poly.replace(/(\d)(x)/gi, "$1*$2");
 
-    // 3️⃣ Insert multiplication between x and number (x2 → x*2) [rare but safe]
+    // 3️⃣ Insert * between x and number (x2 → x*2)
     poly = poly.replace(/(x)(\d)/gi, "$1*$2");
 
-    // 4️⃣ Replace x with actual value
+    // 4️⃣ Insert * between number and parentheses: 2(x+1) → 2*(x+1)
+    poly = poly.replace(/(\d)\(/g, "$1*(");
+
+    // 5️⃣ Insert * between closing parenthesis and number: (x+1)2 → (x+1)*2
+    poly = poly.replace(/\)(\d)/g, ")*$1");
+
+    // 6️⃣ Insert * between x and parentheses: x(x+1) → x*(x+1)
+    poly = poly.replace(/x\(/gi, "x*(");
+
+    // 7️⃣ Replace x with actual value
     poly = poly.replace(/x/gi, `(${x})`);
 
     const exact = eval(poly);
@@ -329,9 +338,11 @@ function evaluatePoly() {
     polyResult.innerHTML = "Invalid polynomial format.";
   }
 }
+}
 
 </script>
 
 </body>
 </html>
+
 
