@@ -42,8 +42,7 @@ button.primary-btn:hover { background: #fff; color: #000; }
 </head>
 <body class="min-h-screen flex">
 
-<!-- SIDEBAR -->
-<aside class="w-56 border-r border-zinc-900 px-10 py-16 flex flex-col justify-between">
+<aside class="w-56 min-h-screen border-r border-zinc-900 px-6 py-16 flex flex-col justify-between fixed left-0 top-0">
   <div>
     <h2 class="text-lg mb-16 tracking-widest">NUMERICAL</h2>
     <nav class="flex flex-col gap-6 text-sm uppercase tracking-wider">
@@ -58,7 +57,7 @@ button.primary-btn:hover { background: #fff; color: #000; }
 </aside>
 
 <!-- MAIN -->
-<main class="flex-1 px-24 py-24 relative overflow-hidden">
+<main class="flex-1 ml-56 px-12 py-24 relative overflow-visible">
   <div class="max-w-3xl relative">
     <h1 class="text-6xl mb-6">Numerical Methods</h1>
     <p class="text-zinc-500 mb-20 tracking-wide">Controlled precision. Minimal form.</p>
@@ -238,3 +237,4 @@ Scientific Notation: ${approx.toExponential(k)}
 </script>
 </body>
 </html>
+
