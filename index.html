@@ -231,7 +231,7 @@ function evaluatePoly() {
   if (!poly || isNaN(x)) return showResult("polyResult","Invalid input.");
 
   try {
-    const exact = eval(poly.replace(/x/g,"("+x+")"));
+    const exact = eval(poly.replace(/x/g,"("+x+")").replace(/^/g, "**"));
     const approx = method==="chop"?chop(exact,k):roundNum(exact,k);
 
     showResult("polyResult",
@@ -244,3 +244,4 @@ function evaluatePoly() {
 </script>
 </body>
 </html>
+
