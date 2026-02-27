@@ -294,7 +294,7 @@ function errorAnalysis() {
 }
 
 function evaluatePoly() {
-  const poly = polyInput.value;
+  let poly = polyInput.value.trim();
   const x = parseFloat(xval.value);
   const k = parseInt(polySig.value);
   const m = polyMethod.value;
@@ -302,7 +302,19 @@ function evaluatePoly() {
   if (!poly || isNaN(x)) return;
 
   try {
-    const exact = eval(poly.replace(/x/g, `(${x})`));
+    // 1️⃣ Replace ^ with **
+    poly = poly.replace(/\^/g, "**");
+
+    // 2️⃣ Insert multiplication between number and x (2x → 2*x)
+    poly = poly.replace(/(\d)(x)/gi, "$1*$2");
+
+    // 3️⃣ Insert multiplication between x and number (x2 → x*2) [rare but safe]
+    poly = poly.replace(/(x)(\d)/gi, "$1*$2");
+
+    // 4️⃣ Replace x with actual value
+    poly = poly.replace(/x/gi, `(${x})`);
+
+    const exact = eval(poly);
     const approx = m === "chop" ? chop(exact, k) : roundNum(exact, k);
 
     polyResult.innerHTML = `
@@ -313,10 +325,13 @@ function evaluatePoly() {
     animateValue(document.getElementById("p1"), 0, exact, k);
     animateValue(document.getElementById("p2"), 0, approx, k);
 
-  } catch {}
+  } catch {
+    polyResult.innerHTML = "Invalid polynomial format.";
+  }
 }
 
 </script>
 
 </body>
 </html>
+
