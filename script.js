@@ -134,3 +134,66 @@ Scientific Notation: ${approx.toExponential(k)}
     polyResult.innerText = "Invalid polynomial format.";
   }
 }
+
+// ===============================
+// IEEE 754 DECODER
+// ===============================
+function decodeIEEE() {
+  let bin = binaryInput.value.replace(/\s/g, '');
+
+  if (bin.length !== 64) {
+    decodeResult.innerText = "Must be exactly 64 bits.";
+    return;
+  }
+
+  const sign = parseInt(bin[0], 2);
+  const exponent = parseInt(bin.substring(1, 12), 2);
+  const fractionBits = bin.substring(12);
+
+  const bias = 1023;
+  const e = exponent - bias;
+
+  let fraction = 1;
+  for (let i = 0; i < fractionBits.length; i++) {
+    if (fractionBits[i] === '1') {
+      fraction += Math.pow(2, -(i + 1));
+    }
+  }
+
+  const value = Math.pow(-1, sign) * fraction * Math.pow(2, e);
+
+  decodeResult.innerText = `
+Sign: ${sign}
+Exponent (biased): ${exponent}
+Exponent (unbiased): ${e}
+Mantissa: ${fraction}
+Real Value: ${value}
+`;
+}
+
+// ===============================
+// DECIMAL TO IEEE 754
+// ===============================
+function convertIEEE() {
+  const num = parseFloat(decimalInput.value);
+
+  if (isNaN(num)) return;
+
+  const buffer = new ArrayBuffer(8);
+  const view = new DataView(buffer);
+
+  view.setFloat64(0, num);
+
+  let binary = "";
+  for (let i = 0; i < 8; i++) {
+    let byte = view.getUint8(i).toString(2);
+    binary += byte.padStart(8, '0');
+  }
+
+  convertResult.innerText = `
+IEEE-754 (64-bit):
+${binary.substring(0,1)} 
+${binary.substring(1,12)} 
+${binary.substring(12)}
+`;
+}
