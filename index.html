@@ -91,6 +91,34 @@
         <div id="polyResult" class="result"></div>
       </div>
     </section>
+    <!-- FLOATING POINT -->
+<section id="fp" class="page">
+  <div class="card">
+    <h2 class="text-3xl mb-10">Floating-Point & Precision Tools</h2>
+
+    <h3 class="mb-4 text-xl">IEEE-754 Decoder (64-bit)</h3>
+    <input type="text" id="binaryInput"
+      placeholder="Enter 64-bit binary (space separated allowed)"
+      class="mb-6">
+
+    <button onclick="decodeIEEE()" class="primary-btn mb-10">
+      Decode Binary
+    </button>
+
+    <div id="decodeResult" class="result mb-12"></div>
+
+    <h3 class="mb-4 text-xl">Decimal → IEEE-754</h3>
+    <input type="number" id="decimalInput"
+      placeholder="Enter Decimal Number"
+      class="mb-6">
+
+    <button onclick="convertIEEE()" class="primary-btn mb-10">
+      Convert to IEEE-754
+    </button>
+
+    <div id="convertResult" class="result"></div>
+  </div>
+</section>
 
   </div>
 </main>
@@ -98,4 +126,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
