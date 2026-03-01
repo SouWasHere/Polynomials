@@ -178,9 +178,13 @@ Real Value: ${value}
 // DECIMAL TO IEEE 754
 // ===============================
 function convertIEEE() {
-  const num = parseFloat(decimalInput.value);
+  const num = parseFloat(document.getElementById("decimalInput").value);
+  const output = document.getElementById("convertResult");
 
-  if (isNaN(num)) return;
+  if (isNaN(num)) {
+    output.innerText = "Please enter a valid number.";
+    return;
+  }
 
   const buffer = new ArrayBuffer(8);
   const view = new DataView(buffer);
@@ -193,10 +197,11 @@ function convertIEEE() {
     binary += byte.padStart(8, '0');
   }
 
-  convertResult.innerText = `
+  output.innerText = `
 IEEE-754 (64-bit):
-${binary.substring(0,1)} 
-${binary.substring(1,12)} 
-${binary.substring(12)}
+
+Sign: ${binary.substring(0,1)}
+Exponent: ${binary.substring(1,12)}
+Mantissa: ${binary.substring(12)}
 `;
 }
