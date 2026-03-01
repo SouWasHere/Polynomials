@@ -139,10 +139,13 @@ Scientific Notation: ${approx.toExponential(k)}
 // IEEE 754 DECODER
 // ===============================
 function decodeIEEE() {
-  let bin = binaryInput.value.replace(/\s/g, '');
+  const input = document.getElementById("binaryInput").value;
+  const output = document.getElementById("decodeResult");
+
+  let bin = input.replace(/\s/g, '');
 
   if (bin.length !== 64) {
-    decodeResult.innerText = "Must be exactly 64 bits.";
+    output.innerText = "Must be exactly 64 bits.";
     return;
   }
 
@@ -162,7 +165,7 @@ function decodeIEEE() {
 
   const value = Math.pow(-1, sign) * fraction * Math.pow(2, e);
 
-  decodeResult.innerText = `
+  output.innerText = `
 Sign: ${sign}
 Exponent (biased): ${exponent}
 Exponent (unbiased): ${e}
