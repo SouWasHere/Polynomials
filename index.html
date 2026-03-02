@@ -30,6 +30,7 @@
 
 <main class="flex-1 ml-56 px-12 py-24 relative overflow-visible">
   <div class="max-w-3xl relative">
+
     <h1 class="text-6xl mb-6">Numerical Methods</h1>
     <p class="text-zinc-500 mb-20 tracking-wide">Controlled precision. Minimal form.</p>
 
@@ -92,52 +93,39 @@
         <div id="polyResult" class="result"></div>
       </div>
     </section>
+
     <!-- FLOATING POINT -->
-<section id="fp" class="page">
-  <div class="card">
-    <h2 class="text-3xl mb-10">Floating-Point & Precision Tools</h2>
+    <section id="fp" class="page">
+      <div class="card">
+        <h2 class="text-3xl mb-10">Floating-Point & Precision Tools</h2>
 
-    <h3 class="mb-4 text-xl">IEEE-754 Decoder (64-bit)</h3>
-    <input type="text" id="binaryInput"
-      placeholder="Enter 64-bit binary (space separated allowed)"
-      class="mb-6">
+        <h3 class="mb-4 text-xl">IEEE-754 Decoder (64-bit)</h3>
+        <input type="text" id="binaryInput"
+          placeholder="Enter 64-bit binary (space separated allowed)"
+          class="mb-6">
 
-    <button onclick="decodeIEEE()" class="primary-btn mb-10">
-      Decode Binary
-    </button>
+        <button onclick="decodeIEEE()" class="primary-btn mb-10">
+          Decode Binary
+        </button>
 
-    <div id="decodeResult" class="result mb-12"></div>
+        <div id="decodeResult" class="result mb-12"></div>
 
-    <h3 class="mb-4 text-xl">Decimal → IEEE-754</h3>
-    <input type="number" id="decimalInput"
-      placeholder="Enter Decimal Number"
-      class="mb-6">
+        <h3 class="mb-4 text-xl">Decimal → IEEE-754</h3>
+        <input type="number" id="decimalInput"
+          placeholder="Enter Decimal Number"
+          class="mb-6">
 
-    <button onclick="convertIEEE()" class="primary-btn mb-10">
-      Convert to IEEE-754
-    </button>
+        <button onclick="convertIEEE()" class="primary-btn mb-10">
+          Convert to IEEE-754
+        </button>
 
-    <div id="convertResult" class="result"></div>
-  </div>
-</section>
+        <div id="convertResult" class="result"></div>
+      </div>
+    </section>
 
-  </div>
-  <div class="card mt-12 border-t border-zinc-100 pt-10">
-  <h2 class="text-3xl mb-6">Worked Examples</h2>
-  <p class="text-zinc-500 mb-8 italic">Solutions for 2026.015625 and √3 approximations.</p>
-  
-  <button id="toggleBtn" onclick="toggleSolutions()" class="secondary-btn border border-zinc-900 px-4 py-2 uppercase text-xs tracking-widest hover:bg-zinc-900 hover:text-white transition-all">
-    Show Solutions
-  </button>
-
-  
+ 
 </main>
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
