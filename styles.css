@@ -83,3 +83,20 @@ button.primary-btn:hover {
   letter-spacing: 0.5px;
   white-space: pre-line;
 }
+
+.hidden {
+  display: none;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.secondary-btn {
+  cursor: pointer;
+}
