@@ -205,3 +205,16 @@ Exponent: ${binary.substring(1,12)}
 Mantissa: ${binary.substring(12)}
 `;
 }
+
+function toggleSolutions() {
+  const content = document.getElementById('solutionContent');
+  const btn = document.getElementById('toggleBtn');
+  
+  if (content.classList.contains('hidden')) {
+    content.classList.remove('hidden');
+    btn.textContent = 'Hide Solutions';
+  } else {
+    content.classList.add('hidden');
+    btn.textContent = 'Show Solutions';
+  }
+}
